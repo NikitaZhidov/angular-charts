@@ -1,0 +1,36 @@
+<div class="dashboard-header">
+	<mat-form-field appearance="outline">
+		<mat-label>Show charts in period</mat-label>
+		<mat-date-range-input disabled [formGroup]="filters" [rangePicker]="picker">
+			<input matStartDate formControlName="start" placeholder="Start date" />
+			<input matEndDate formControlName="end" placeholder="End date" />
+		</mat-date-range-input>
+		<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+		<mat-date-range-picker disabled="false" #picker></mat-date-range-picker>
+
+		<mat-error *ngIf="filters.controls.start.hasError('matStartDateInvalid')"
+			>Invalid start date</mat-error
+		>
+		<mat-error *ngIf="filters.controls.end.hasError('matEndDateInvalid')"
+			>Invalid end date</mat-error
+		>
+	</mat-form-field>
+
+	<button (click)="clearFilters()" class="clear-filters-button" mat-button>
+		Clear filters
+	</button>
+</div>
+
+<div class="dashboard-body">
+	<ng-container *ngFor="let card of cards">
+		<app-dashboard-card
+			*ngIf="canShowCard(card)"
+			[cardInfo]="card"
+			(cardInfoUpdated)="onUpdateCardInfo($event)"
+			[availableSensors]="(availableSensors$ | async) || []"
+			(remove)="onRemoveCard(card.id)"
+		></app-dashboard-card>
+	</ng-container>
+
+	<div class="add-card" (click)="onAddCard()">Add card</div>
+</div>

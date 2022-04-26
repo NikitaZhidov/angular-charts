@@ -1,0 +1,16 @@
+<div class="close-btn" (click)="onCloseSidebar()">&times;</div>
+
+<h5 class="title">Angular Charts</h5>
+
+<nav class="menu">
+	<ng-container *ngFor="let route of routes">
+		<a
+			class="route"
+			(click)="onCloseSidebar()"
+			routerLinkActive="active"
+			[routerLink]="route.route"
+		>
+			{{ route.title }}
+		</a>
+	</ng-container>
+</nav>

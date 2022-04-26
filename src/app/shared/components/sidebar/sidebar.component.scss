@@ -1,0 +1,77 @@
+@import "/src/styles/text";
+@import "/src/styles/colors";
+@import "/src/styles/sizing";
+
+:host {
+	@include on-tablet-or-less() {
+		background-color: $color-background;
+
+		box-shadow: $box-shadow;
+		z-index: 100;
+	}
+
+	display: block;
+	height: 100vh;
+	position: fixed;
+
+	padding: 25px;
+}
+
+.title {
+	font-size: $text-xl;
+
+	color: $color-black;
+	font-weight: 700;
+	text-transform: uppercase;
+
+	margin: 0;
+	margin-bottom: 25px;
+}
+
+.menu {
+	display: flex;
+	flex-direction: column;
+}
+
+.route {
+	padding: 10px 20px;
+
+	transition: all 0.2s linear;
+
+	&:hover {
+		background-color: $color-info-light;
+	}
+
+	&.active {
+		position: relative;
+
+		color: $color-primary;
+		background-color: $color-info-light;
+
+		&::before {
+			content: "";
+			display: block;
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 3px;
+			height: 100%;
+			background-color: $color-primary;
+		}
+	}
+}
+
+.close-btn {
+	@include on-tablet-or-less() {
+		display: inline-block;
+	}
+
+	position: absolute;
+	right: 0;
+	top: 0;
+	display: none;
+	text-align: right;
+	font-size: $text-xl;
+
+	padding: 10px;
+}

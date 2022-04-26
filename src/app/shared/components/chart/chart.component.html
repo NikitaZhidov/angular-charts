@@ -1,0 +1,13 @@
+<highcharts-chart
+	*ngIf="isHighcharts"
+	[Highcharts]="Highcharts"
+	[(update)]="update"
+	[callbackFunction]="chartCallback"
+	[options]="chartOptions"
+	class="chart"
+	[class.hide]="loading"
+></highcharts-chart>
+
+<ng-container *ngIf="loading">
+	<mat-spinner class="spinner"></mat-spinner>
+</ng-container>

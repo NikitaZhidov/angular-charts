@@ -1,0 +1,19 @@
+<button
+	(click)="openSidebar = true"
+	mat-mini-fab
+	color="primary"
+	aria-label="Example icon button with a menu icon"
+	class="burger"
+>
+	<mat-icon>menu</mat-icon>
+</button>
+
+<app-sidebar
+	[(open)]="openSidebar"
+	class="sidebar"
+	[class.open]="openSidebar"
+></app-sidebar>
+
+<div class="app-content">
+	<router-outlet></router-outlet>
+</div>

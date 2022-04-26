@@ -1,0 +1,84 @@
+<div class="card-header">
+	<mat-form-field class="select select-sensors" appearance="outline">
+		<mat-label>Sensors</mat-label>
+		<mat-select
+			[(ngModel)]="cardInfo.selectedSensorsIds"
+			(ngModelChange)="onChangeSelectedSensorsIds($event)"
+			multiple
+		>
+			<mat-option *ngFor="let sensor of availableSensors" [value]="sensor.id">
+				{{ sensor.name }}
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+
+	<mat-form-field class="select select-chart-type" appearance="outline">
+		<mat-label>Chart type</mat-label>
+		<mat-select
+			[(ngModel)]="cardInfo.chartType"
+			(ngModelChange)="onCardInfoUpdated()"
+		>
+			<mat-option *ngFor="let type of chartTypes" [value]="type">
+				{{ type }}
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+
+	<mat-form-field class="select" appearance="fill">
+		<mat-label>Choose date</mat-label>
+		<input
+			matInput
+			[(ngModel)]="cardInfo.date"
+			(ngModelChange)="onCardInfoUpdated()"
+			[matDatepicker]="datePicker"
+			[disabled]="true"
+		/>
+		<mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+		<mat-datepicker [disabled]="false" #datePicker></mat-datepicker>
+	</mat-form-field>
+
+	<div (click)="remove.emit()" class="remove-card-btn">&times;</div>
+</div>
+
+<div class="card-body">
+	<mat-spinner
+		*ngIf="loadingChart$ | async"
+		diameter="45"
+		class="spinner"
+	></mat-spinner>
+
+	<ng-container *ngIf="chartData$ | async as chartData">
+		<div class="chart-wrapper">
+			<app-chart
+				class="chart"
+				[class.hide]="chartData.length === 0"
+				[options]="chartOptions"
+				[loading]="(loadingChart$ | async) === true"
+				[data]="chartData"
+				[type]="cardInfo.chartType"
+			></app-chart>
+
+			<span class="no-selected-msg" *ngIf="chartData.length === 0"
+				>Select sensors to watch</span
+			>
+		</div>
+	</ng-container>
+</div>
+
+<div class="card-footer">
+	<div class="sensors-colors-select">
+		<ng-container *ngFor="let sensor of availableSensors">
+			<div
+				class="sensor-item"
+				*ngIf="cardInfo.selectedSensorsIds.includes(sensor.id)"
+			>
+				<div class="sensor-name">{{ sensor.name }}</div>
+				<input
+					type="color"
+					(change)="onChangeColor(sensor, $event)"
+					[value]="getColorBySensorId(sensor.id)"
+				/>
+			</div>
+		</ng-container>
+	</div>
+</div>

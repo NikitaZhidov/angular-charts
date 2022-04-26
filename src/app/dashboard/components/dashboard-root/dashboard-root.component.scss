@@ -1,0 +1,59 @@
+@import "/src/styles/sizing";
+@import "/src/styles/text";
+@import "/src/styles/colors";
+
+.dashboard-header {
+	padding: 10px;
+
+	border-radius: 5px;
+}
+
+.clear-filters-button {
+	margin-left: 10px;
+}
+
+.dashboard-body {
+	@include on-laptop-or-less() {
+		grid-template-columns: 100%;
+		grid-template-rows: min-content;
+	}
+
+	display: grid;
+
+	height: 100%;
+	width: 100%;
+
+	gap: 10px;
+
+	grid-template-columns: 50% 50%;
+	grid-template-rows: min-content;
+}
+
+.add-card {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: $text-xl;
+
+	min-height: 50vh;
+
+	border-radius: 10px;
+	box-shadow: $box-shadow;
+
+	cursor: pointer;
+
+	background-color: transparent;
+
+	transition: background-color 0.2s linear;
+
+	&:hover {
+		background-color: lighten($color-info-light, 10%);
+	}
+
+	&:active {
+		background-color: $color-info-light;
+	}
+}

@@ -1,0 +1,119 @@
+@import "/src/styles/colors";
+@import "/src/styles/text";
+@import "/src/styles/sizing";
+
+:host {
+	display: block;
+
+	border-radius: 2px;
+	padding: 15px;
+
+	box-shadow: $box-shadow;
+
+	background-color: $color-white;
+
+	max-width: 100%;
+}
+
+.card-header {
+	@include on-laptop-or-less() {
+		flex-direction: column;
+		padding-top: 20px;
+	}
+
+	position: relative;
+
+	display: flex;
+	flex-wrap: wrap;
+
+	align-items: center;
+}
+
+.select {
+	@include on-laptop-or-less() {
+		margin-right: 0;
+		width: 100%;
+	}
+
+	margin-right: 10px;
+
+	&:last-child {
+		margin-right: 0;
+	}
+}
+
+.card-body {
+	position: relative;
+}
+
+.spinner {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+
+	z-index: 10;
+}
+
+.chart-wrapper {
+	position: relative;
+}
+
+.no-selected-msg {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+
+	transform: translate(-50%, -50%);
+
+	font-weight: 300;
+	font-size: $text-lg;
+}
+
+.chart {
+	opacity: 1;
+	visibility: visible;
+
+	transition: opacity 0.25s linear;
+}
+
+.hide {
+	opacity: 0;
+	visibility: hidden;
+}
+
+.card-footer {
+	border-top: 1px solid $color-info-light;
+	height: 75px;
+	overflow-y: auto;
+
+	padding: 10px 0 5px;
+}
+
+.sensors-colors-select {
+	display: flex;
+	flex-direction: column;
+}
+
+.sensor-item {
+	display: flex;
+	justify-content: space-between;
+}
+
+.remove-card-btn {
+	font-size: $text-xl;
+	position: absolute;
+	right: -10px;
+	top: -10px;
+
+	cursor: pointer;
+
+	width: 30px;
+	height: 30px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: $color-info-light;
+
+	border-radius: 50%;
+}

@@ -1,0 +1,62 @@
+@import "/src/styles/colors";
+@import "/src/styles/sizing";
+
+$sidebar-width: 220px;
+
+:host {
+	display: flex;
+
+	background-color: $color-background;
+}
+
+.app-content {
+	@include on-tablet-or-less() {
+		margin-left: 0;
+		max-width: 100%;
+
+		padding: 20px;
+	}
+
+	@include on-mobile() {
+		padding: 10px;
+	}
+
+	flex: 1;
+
+	padding: 30px;
+
+	margin-left: $sidebar-width;
+
+	height: 100vh;
+
+	overflow-y: auto;
+}
+
+.sidebar {
+	@include on-tablet-or-less() {
+		transition: transform 0.2s ease-in-out;
+
+		transform: translateX(-220px);
+
+		&.open {
+			transform: translateX(0px);
+		}
+	}
+
+	width: $sidebar-width;
+}
+
+.burger {
+	@include on-tablet-or-less() {
+		display: block;
+	}
+
+	position: fixed;
+
+	left: 10px;
+	top: 10px;
+
+	z-index: 80;
+
+	display: none;
+}
