@@ -32,6 +32,12 @@ $xl: 1200px;
 	}
 }
 
+@mixin on-laptop-or-greater() {
+	@media only screen and (min-width: $m) {
+		@content;
+	}
+}
+
 @mixin on-laptop-or-less() {
 	@media only screen and (min-width: $m) and (max-width: calc(#{$xl} - 1px)) {
 		@content;
@@ -40,4 +46,7 @@ $xl: 1200px;
 	@include on-tablet-or-less() {
 		@content;
 	}
+}
+
+@mixin on-la {
 }

@@ -13,6 +13,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
 	declarations: [DashboardRootComponent, DashboardCardComponent],
@@ -23,6 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
 		FormsModule,
 		ReactiveFormsModule,
 		MatSelectModule,
+		MatExpansionModule,
 		MatFormFieldModule,
 		MatProgressSpinnerModule,
 		MatNativeDateModule,

@@ -1,43 +1,61 @@
 <div class="card-header">
-	<mat-form-field class="select select-sensors" appearance="outline">
-		<mat-label>Sensors</mat-label>
-		<mat-select
-			[(ngModel)]="cardInfo.selectedSensorsIds"
-			(ngModelChange)="onChangeSelectedSensorsIds($event)"
-			multiple
-		>
-			<mat-option *ngFor="let sensor of availableSensors" [value]="sensor.id">
-				{{ sensor.name }}
-			</mat-option>
-		</mat-select>
-	</mat-form-field>
-
-	<mat-form-field class="select select-chart-type" appearance="outline">
-		<mat-label>Chart type</mat-label>
-		<mat-select
-			[(ngModel)]="cardInfo.chartType"
-			(ngModelChange)="onCardInfoUpdated()"
-		>
-			<mat-option *ngFor="let type of chartTypes" [value]="type">
-				{{ type }}
-			</mat-option>
-		</mat-select>
-	</mat-form-field>
-
-	<mat-form-field class="select" appearance="fill">
-		<mat-label>Choose date</mat-label>
-		<input
-			matInput
-			[(ngModel)]="cardInfo.date"
-			(ngModelChange)="onCardInfoUpdated()"
-			[matDatepicker]="datePicker"
-			[disabled]="true"
-		/>
-		<mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
-		<mat-datepicker [disabled]="false" #datePicker></mat-datepicker>
-	</mat-form-field>
-
 	<div (click)="remove.emit()" class="remove-card-btn">&times;</div>
+
+	<div class="settings-desktop">
+		<ng-container *ngTemplateOutlet="cardSettings"></ng-container>
+	</div>
+
+	<div class="settings-mobile">
+		<mat-expansion-panel hideToggle>
+			<mat-expansion-panel-header appearance="outline">
+				<mat-panel-title> Chart settings </mat-panel-title>
+			</mat-expansion-panel-header>
+			<ng-container *ngTemplateOutlet="cardSettings"></ng-container>
+		</mat-expansion-panel>
+	</div>
+
+	<ng-template #cardSettings>
+		<mat-form-field class="select select-sensors" appearance="outline">
+			<mat-label>Sensors</mat-label>
+			<mat-select
+				[(ngModel)]="cardInfo.selectedSensorsIds"
+				(ngModelChange)="onChangeSelectedSensorsIds($event)"
+				multiple
+			>
+				<mat-option *ngFor="let sensor of availableSensors" [value]="sensor.id">
+					{{ sensor.name }}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+
+		<mat-form-field class="select select-chart-type" appearance="outline">
+			<mat-label>Chart type</mat-label>
+			<mat-select
+				[(ngModel)]="cardInfo.chartType"
+				(ngModelChange)="onCardInfoUpdated()"
+			>
+				<mat-option *ngFor="let type of chartTypes" [value]="type">
+					{{ type }}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+
+		<mat-form-field class="select" appearance="fill">
+			<mat-label>Choose date</mat-label>
+			<input
+				matInput
+				[(ngModel)]="cardInfo.date"
+				(ngModelChange)="onCardInfoUpdated()"
+				[matDatepicker]="datePicker"
+				[disabled]="true"
+			/>
+			<mat-datepicker-toggle
+				matSuffix
+				[for]="datePicker"
+			></mat-datepicker-toggle>
+			<mat-datepicker [disabled]="false" #datePicker></mat-datepicker>
+		</mat-form-field>
+	</ng-template>
 </div>
 
 <div class="card-body">

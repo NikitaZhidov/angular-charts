@@ -29,6 +29,21 @@
 	align-items: center;
 }
 
+.settings-desktop {
+	@include on-tablet-or-less() {
+		display: none;
+	}
+}
+
+.settings-mobile {
+	@include on-laptop-or-greater() {
+		display: none;
+	}
+
+	margin: 5px 0 10px;
+	max-width: 100%;
+}
+
 .select {
 	@include on-laptop-or-less() {
 		margin-right: 0;
