@@ -1,0 +1,42 @@
+@import "/src/styles/colors";
+@import "/src/styles/text";
+
+:host {
+	display: flex;
+	flex-direction: column;
+
+	padding: 25px 15px;
+
+	box-shadow: $box-shadow;
+	background-color: $color-white;
+	border-radius: 10px;
+
+	height: 300px;
+	overflow-y: auto;
+}
+
+.name {
+	font-size: $text-md;
+	font-weight: 300;
+
+	text-align: center;
+
+	border-bottom: 1px solid $color-info-light;
+
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+
+.property {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	font-size: $text-xs;
+
+	margin: 10px 0;
+}
+
+.label {
+	font-weight: 300;
+}

@@ -10,6 +10,13 @@ export const routes: Routes = [
 			),
 	},
 	{
+		path: AppRoutes.sensors,
+		loadChildren: () =>
+			import('./sensors/sensors.lazy-loaded.module').then(
+				(m) => m.SensorsLazyLoadedModule
+			),
+	},
+	{
 		path: '**',
 		redirectTo: AppRoutes.dashboard,
 	},

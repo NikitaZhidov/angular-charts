@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { AppRoutes } from 'src/app/constants';
 
-type SidebarRoute = {
+export type SidebarRoute = {
 	title: string;
 	route: string;
 };
@@ -31,12 +31,13 @@ export class SidebarComponent {
 			route: AppRoutes.dashboard,
 		},
 		{
-			title: 'Example',
-			route: 'AppRoutes.dashboard',
+			title: 'Sensors',
+			route: AppRoutes.sensors,
 		},
 	];
 
 	onCloseSidebar() {
+		this.open = false;
 		this.openChange.emit(false);
 	}
 }

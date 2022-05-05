@@ -18,7 +18,6 @@ export type MockCard = {
 	chartType: ChartType;
 };
 
-// TODO save card state
 // TODO edit README
 
 @Component({
@@ -28,6 +27,12 @@ export type MockCard = {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardRootComponent implements OnInit {
+	readonly maxCardCount = 4;
+
+	get canAddCards() {
+		return this.cards.length < this.maxCardCount;
+	}
+
 	cards: MockCard[] = [];
 
 	filters = new FormGroup({
@@ -38,7 +43,7 @@ export class DashboardRootComponent implements OnInit {
 	readonly availableSensors$ = this._sensorData.getAvailableSensors();
 
 	constructor(
-		private _sensorData: SensorsDataService,
+		private readonly _sensorData: SensorsDataService,
 		private readonly _dashboardService: DashboardService
 	) {}
 
@@ -75,7 +80,7 @@ export class DashboardRootComponent implements OnInit {
 
 		if (cardIndex > -1) {
 			this._dashboardService
-				.removeCard(this.cards[cardIndex])
+				.removeCard(this.cards[cardIndex].id)
 				.pipe(take(1))
 				.subscribe(() => {
 					this.cards.splice(cardIndex, 1);

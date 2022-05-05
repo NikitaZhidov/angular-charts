@@ -32,5 +32,5 @@
 		></app-dashboard-card>
 	</ng-container>
 
-	<div class="add-card" (click)="onAddCard()">Add card</div>
+	<div class="add-card" *ngIf="canAddCards" (click)="onAddCard()">Add card</div>
 </div>

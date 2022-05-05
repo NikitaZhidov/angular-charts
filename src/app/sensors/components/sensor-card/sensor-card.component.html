@@ -1,0 +1,15 @@
+<ng-container *ngIf="sensor">
+	<h6 class="name">{{ sensor.name }}</h6>
+
+	<div class="body">
+		<div class="property">
+			<span class="label">Type</span>
+			<span class="value">{{ sensor.type }}</span>
+		</div>
+
+		<div class="property">
+			<span class="label">Measurement unit</span>
+			<span class="value">{{ sensor.unit }}</span>
+		</div>
+	</div>
+</ng-container>

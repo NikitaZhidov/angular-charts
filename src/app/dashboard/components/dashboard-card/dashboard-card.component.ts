@@ -65,7 +65,7 @@ export class DashboardCardComponent implements OnInit {
 
 	readonly chartData$: Observable<ChartData[]> = this._selectedSensorsIds$.pipe(
 		tap((sensors) => sensors?.length && this.loadingChart$.next(true)),
-		debounceTime(400),
+		debounceTime(350),
 		startWith([]),
 		switchMap((sensorsIds) =>
 			sensorsIds?.length
@@ -125,7 +125,13 @@ export class DashboardCardComponent implements OnInit {
 	}
 
 	onChangeSelectedSensorsIds(sensorsIds: number[]) {
-		this._selectedSensorsIds$.next(sensorsIds);
+		const availableSensorIds = sensorsIds.filter((id) => {
+			const sensor = this.availableSensors.find((s) => s.id === id);
+			return !!sensor;
+		});
+
+		this._selectedSensorsIds$.next(availableSensorIds);
+		this.cardInfo.selectedSensorsIds = availableSensorIds;
 
 		this.onCardInfoUpdated();
 	}

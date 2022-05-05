@@ -37,7 +37,7 @@ export type ChartType = typeof chartTypes[number];
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChartComponent implements OnInit {
-	private readonly _chartInitialized$ = new ReplaySubject<null>(1);
+	readonly chartInitialized$ = new ReplaySubject<null>(1);
 
 	private _data: ChartData[] = [];
 	private _type: ChartType = 'line';
@@ -101,15 +101,10 @@ export class ChartComponent implements OnInit {
 	readonly isHighcharts = typeof Highcharts === 'object';
 	readonly Highcharts = Highcharts;
 
-	chartOptions: Highcharts.Options = {};
+	initialChartOptions: Highcharts.Options = {};
 
 	constructor() {
-		this.chartOptions = {
-			plotOptions: {
-				series: {
-					pointStart: 0,
-				},
-			},
+		this.initialChartOptions = {
 			mapNavigation: {
 				enableMouseWheelZoom: true,
 			},
@@ -156,14 +151,16 @@ export class ChartComponent implements OnInit {
 
 		this.chartCallback = (chart: Highcharts.Chart) => {
 			this.chart = chart;
-			this._chartInitialized$.next(null);
-			this._chartInitialized$.complete();
+			this.chartInitialized$.next(null);
+			this.chartInitialized$.complete();
 		};
 	}
 
 	ngOnInit() {
-		this._chartInitialized$.subscribe(() => {
-			this._updateChartOptions();
+		this.chartInitialized$.subscribe(() => {
+			setTimeout(() => {
+				this._updateChartOptions();
+			});
 		});
 	}
 

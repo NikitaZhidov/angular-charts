@@ -1,0 +1,7 @@
+<h4 class="title">Available sensors</h4>
+
+<div class="sensors">
+	<ng-container *ngFor="let sensor of availableSensors$ | async">
+		<app-sensor-card [sensor]="sensor"></app-sensor-card>
+	</ng-container>
+</div>

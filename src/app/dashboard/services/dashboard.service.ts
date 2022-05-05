@@ -19,12 +19,12 @@ export class DashboardService {
 		return of(cards);
 	}
 
-	removeCard(card: MockCard): Observable<null> {
+	removeCard(cardId: number): Observable<null> {
 		const cardsCandidate = this._localStorage.getItem(LocalStorageKeys.cards);
 
 		let cards: MockCard[] = cardsCandidate ? JSON.parse(cardsCandidate) : [];
 
-		cards = cards.filter((item) => item.id !== card.id);
+		cards = cards.filter((item) => item.id !== cardId);
 
 		this._localStorage.setItem(LocalStorageKeys.cards, JSON.stringify(cards));
 

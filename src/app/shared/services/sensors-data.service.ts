@@ -27,6 +27,10 @@ export class SensorsDataService {
 		start: Date = new Date(Date.now() - 60 * 1000),
 		durationInSeconds: number = 60
 	): Observable<SensorData> {
+		if (durationInSeconds < 0) {
+			durationInSeconds = 0;
+		}
+
 		return new Observable<SensorData>((sub) => {
 			const sensor = availableSensors.find((s) => s.id === sensorId);
 
@@ -46,7 +50,7 @@ export class SensorsDataService {
 					),
 				});
 				sub.complete();
-			}, 300);
+			}, 50);
 		});
 	}
 

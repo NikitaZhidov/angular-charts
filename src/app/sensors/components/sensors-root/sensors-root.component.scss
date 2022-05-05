@@ -1,0 +1,26 @@
+@import "/src/styles/text";
+@import "/src/styles/sizing";
+
+.title {
+	font-size: $text-xl;
+	font-weight: 700;
+
+	margin-bottom: 30px;
+}
+
+.sensors {
+	@include on-tablet() {
+		grid-template-columns: repeat(auto-fill, 45%);
+		justify-content: center;
+	}
+
+	@include on-mobile() {
+		grid-template-columns: repeat(auto-fill, 100%);
+	}
+
+	display: grid;
+	grid-template-columns: repeat(auto-fill, 200px);
+	grid-template-rows: min-content;
+
+	gap: 15px;
+}
